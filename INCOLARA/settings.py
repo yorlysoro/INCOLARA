@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'INCOLARA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'incolara',
-        'USER': 'yorlys',
-        'PASSWORD': 'yorlys',
-        'HOST': '192.168.1.106',
+        'NAME': 'INCOLARA',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
         'PORT':5432,
     }
 }
