@@ -21,19 +21,7 @@ class Atributo(models.Model):
 	def __str__(self):
 		return self.nombre
 
-class Variante(models.Model):
-	valor = models.ForeignKey(
-		Valores_Atributo,
-		on_delete=models.CASCADE,
-		related_name='ValorVariante',
-		)
-	precio_venta = precio_venta = models.DecimalField('Precio de Venta',max_digits=10, decimal_places=2)
-	class Meta:
-		verbose_name = "Variante"
-		verbose_name_plural = "Variantes"
 
-	def __str__(self):
-		return self.valor.valor
 
 class Producto(models.Model):
 	nombre_producto = models.CharField('Nombre del Producto',max_length=255)
@@ -46,7 +34,7 @@ class Producto(models.Model):
 		)
 	tipo_producto = models.CharField('Tipo de Producto',max_length=255, choices=TIPO_PRODUCTO_CHOICES, default='Al')
 	codigo_barras = models.CharField('Codigo de Barras',max_length=255, null=True, blank=True)
-	precio_venta = models.DecimalField('Precio de Venta',max_digits=10, decimal_places=2)
+	precio_venta = models.DecimalField('Precio de Venta',max_digits=10, decimal_places=2, default=0.00)
 	coste = models.DecimalField('Coste', max_digits=10, decimal_places=2, default=0.00)
 	peso = models.DecimalField('Peso', max_digits=4, decimal_places=2, default=0.00)
 	volumen = models.DecimalField('Volumen', max_digits=4, decimal_places=2, default=0.00)
@@ -64,3 +52,19 @@ class Producto(models.Model):
 
 	def __str__(self):
 		return self.nombre_producto
+
+
+class Variante(models.Model):
+	valor = models.ForeignKey(
+		Valores_Atributo,
+		on_delete=models.CASCADE,
+		related_name='ValorVariante',
+		)
+	precio_venta = models.DecimalField('Precio de Venta',max_digits=10, decimal_places=2, default=0.00)
+	producto = models.ManyToManyField(Producto)
+	class Meta:
+		verbose_name = "Variante"
+		verbose_name_plural = "Variantes"
+
+	def __str__(self):
+		return self.valor.valor

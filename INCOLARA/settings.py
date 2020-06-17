@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'INCOLARA.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'INCOLARA',
+        'NAME': 'incolara',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost',
