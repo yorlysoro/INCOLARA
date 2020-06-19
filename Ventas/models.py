@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 from Inventario.models import Producto, Variante
 # Create your models here.
 
 class Base(models.Model):
+	usuario = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 	titulo = models.CharField('Titulo', max_length=255)
 	info_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 	variante = models.ForeignKey(Variante, on_delete=models.CASCADE)
