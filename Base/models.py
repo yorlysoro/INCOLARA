@@ -21,7 +21,7 @@ class Sectores(models.Model):
 		return self.nombre
 
 class Cuenta(models.Model):
-	usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+	usuario = models.OneToOneField(User, on_delete=models.CASCADE)
 	domicilio = models.CharField('Domicilio de la Compania', max_length=255, null=True, blank=True)
 	rif = models.CharField('Registro de Informacion Fiscal', max_length=255, null=True, blank=True)
 	movil = models.CharField('Telefono Movil', max_length=8, null=True, blank=True)
@@ -35,13 +35,13 @@ class Cuenta(models.Model):
 		verbose_name_plural = "Cuentas"
 
 	def __str__(self):
-		return self.usuario.username + " " + self.rif
+		return self.rif
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Cuenta.objects.create(usuario=instance)
 
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.cuenta.save()
+#@receiver(post_save, sender=User)
+#def save_user_profile(sender, instance, **kwargs):
+ #   instance.cuenta.save()
