@@ -18,7 +18,7 @@ class Sectores(models.Model):
 		verbose_name = "Sector"
 		verbose_name_plural = "Sectores"
 	def __str__(self):
-		return self.nombre
+		return self.sector + "--" + self.nombre
 
 class Cuenta(models.Model):
 	usuario = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -4,10 +4,11 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic.edit import FormView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView, ListView
 from django.http import HttpResponseRedirect
-from django.contrib.auth import login
-from .forms import FormularioLogin
+from django.contrib.auth import login, logout
+from .forms import FormularioLogin, FormularioCuenta, FormularioSectores
+from .models import Cuenta, Sectores
 # Create your views here.
 
 class Login(FormView):
@@ -27,5 +28,20 @@ class Login(FormView):
 	    login(self.request, form.get_user())
 	    return super(Login, self).form_valid(form)
 
+def logoutUsuario(request):
+    logout(request)
+    return HttpResponseRedirect('login')
+
 class Inicio(TemplateView):
 	template_name = 'index.html'
+
+
+class MiCuenta(UpdateView):
+	model = Cuenta
+	form_class = FormularioCuenta
+	template_name = 'Base/mi_cuenta.html'
+	success_url = reverse_lazy('inicio')
+
+class SectoresListar(ListView):
+	model = Sectores
+	template_name = 'Base/sectores_list.html'
