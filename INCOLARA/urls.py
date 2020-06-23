@@ -25,4 +25,8 @@ urlpatterns = [
     path('', Login.as_view(), name='login'),
     path('inicio/', login_required(Inicio.as_view()), name='inicio'),
     path('base/', include('Base.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+print(urlpatterns)
