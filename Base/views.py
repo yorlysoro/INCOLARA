@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic.edit import FormView
-from django.views.generic import TemplateView, UpdateView, ListView
+from django.views.generic import TemplateView, UpdateView, ListView, CreateView, DetailView
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, logout
 from .forms import FormularioLogin, FormularioCuenta, FormularioSectores
@@ -43,5 +43,25 @@ class MiCuenta(UpdateView):
 	success_url = reverse_lazy('inicio')
 
 class SectoresListar(ListView):
-	model = Sectores
+	context_object_name = 'Sectores_List'
+	queryset = Sectores.objects.all()
 	template_name = 'Base/sectores_list.html'
+
+class SectoresCrear(CreateView):
+	model = Sectores
+	form_class = FormularioSectores
+	context_object_name = 'Sector'
+	template_name = 'Base/sector_crear.html'
+	success_url = reverse_lazy('Base:lista_sectores')
+
+class SectoresEditar(UpdateView):
+	model = Sectores
+	form_class = FormularioSectores
+	template_name = 'Base/sector_editar.html'
+	
+	def get_success_url(self):
+		return reverse_lazy('Base:sector_detalle', kwargs={ 'pk' : self.object.id })
+
+
+class SectoresDetalle(DetailView):
+	pass
