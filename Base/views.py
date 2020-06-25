@@ -30,7 +30,7 @@ class Login(FormView):
 
 def logoutUsuario(request):
     logout(request)
-    return HttpResponseRedirect('login')
+    return HttpResponseRedirect('/')
 
 class Inicio(TemplateView):
 	template_name = 'index.html'

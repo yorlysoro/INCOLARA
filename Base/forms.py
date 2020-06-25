@@ -14,7 +14,17 @@ class FormularioCuenta(forms.ModelForm):
 	class Meta:
 		model = Cuenta
 		fields = ('usuario', 'domicilio', 'rif', 'movil', 'local', 'correo', 'pagina', 'sector')
-
+		labels = {
+			'sector' : 'Sector',
+		}
+		wigets = {
+			'sector' : forms.Select(
+				attrs = {
+					'class' : 'standardSelect',
+					'data-placeholder' : 'Seleccion su Sector'
+				}
+			)
+		}
 class FormularioSectores(forms.ModelForm):
 
 	class Meta:

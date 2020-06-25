@@ -18,15 +18,14 @@ from django.urls import path,include
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.conf.urls.static import static
-from Base.views import Login, Inicio
+from Base.views import Login, Inicio, logoutUsuario
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Login.as_view(), name='login'),
     path('inicio/', login_required(Inicio.as_view()), name='inicio'),
+    path('logout/', login_required(logoutUsuario), name='logout'),
     path('base/', include('Base.urls')),
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-print(urlpatterns)
