@@ -16,60 +16,78 @@ INCOLARA -- Configuracion de Cuenta
                                 <strong>Configurar Cuenta</strong> <small>Introduzca informacion acerca de su empresa</small>
                             </div>
                             <div class="card-body card-block">
-                                <div class="form-group">
-                                    <label class=" form-control-label">Domicilio de la Compania</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
-                                        <input id='domicilio' class="form-control">
+                                <form method="post" class="" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                      <div class="form-group">
+                                        <label class=" form-control-label">Nombre de la Compania</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+                                            {{ form.first_name }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. Industria C.A</small>
                                     </div>
-                                    <small class="form-text text-muted">ej. Av Lara con Calle 13</small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Registro de Informacion Fiscal</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
-                                        <input id='rif' class="form-control">
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Domicilio de la Compania</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-briefcase"></i></div>
+                                            {{ form.domicilio }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. Av Lara con Calle 13</small>
                                     </div>
-                                    <small class="form-text text-muted">ej. J-0000012-34 </small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Telefono Movil</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-mobile-phone"></i></div>
-                                        <input id='movil' class="form-control">
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Registro de Informacion Fiscal</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+                                            {{ form.rif }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. J-0000012-34 </small>
                                     </div>
-                                    <small class="form-text text-muted">ej. (0412)-9999999</small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Telefono Fijo</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                        <input id='local' class="form-control">
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Telefono Movil</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-mobile-phone"></i></div>
+                                            {{ form.movil }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. (0412)-9999999</small>
                                     </div>
-                                    <small class="form-text text-muted">ej. (0200)-9999999</small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Correo Electronico</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                                        <input id='correo' class="form-control">
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Telefono Fijo</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                            {{ form.local }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. (0200)-9999999</small>
                                     </div>
-                                    <small class="form-text text-muted">ej. micorreo@empresa.com</small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Pagina Web</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-external-link"></i></div>
-                                        <input id='pagina' class="form-control">
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Correo Electronico</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                                            {{ form.email }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. micorreo@empresa.com</small>
                                     </div>
-                                    <small class="form-text text-muted">ej. http://www.miempresa.com </small>
-                                </div>
-                                <div class="form-group">
-                                    <label class=" form-control-label">Sector</label>
-                                    <div class="input-group">
-                                        {{ form.sector }}
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Pagina Web</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-external-link"></i></div>
+                                            {{ form.pagina }}
+                                        </div>
+                                        <small class="form-text text-muted">ej. http://www.miempresa.com </small>
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label class=" form-control-label">Sector</label>
+                                        <div class="input-group">
+                                            {{ form.sector }}
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class=" form-control-label">Logo</label>
+                                        <div class="input-group">
+                                            {{ form.logo }}
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-outline-danger float-right" value="Guardar Cambios"></input>
+                                </form>
                             </div>
                         </div>
                     </div>

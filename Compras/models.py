@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from Base.models import Cuenta
 from  Ventas.models import Venta, Subasta
 # Create your models here.
 class Orden_Compra(models.Model):
-	usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+	usuario = models.ForeignKey(Cuenta, on_delete=models.CASCADE, related_name='Cuenta_Orden_Compra')
 	venta = models.ForeignKey(Venta, on_delete=models.CASCADE)
 	cantidad = models.IntegerField(default=1)
 	class Meta:
@@ -14,7 +14,7 @@ class Orden_Compra(models.Model):
 		return self.cantidad + " de " + self.venta.titulo
 
 class Orden(models.Model):
-	usuario= models.ForeignKey(User, on_delete=models.CASCADE)
+	usuario= models.ForeignKey(Cuenta, on_delete=models.CASCADE, related_name='Cuenta_Orden')
 	ref_code = models.CharField('Codigo de Referencia',max_length=20, blank=True, null=True)
 	productos = models.ManyToManyField(Orden_Compra)
 	fecha_orden = models.DateTimeField(auto_now_add=True)
@@ -25,7 +25,7 @@ class Orden(models.Model):
 		self.usuario.username
 
 class Subastar(models.Model):
-	usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+	usuario = models.ForeignKey(Cuenta, on_delete=models.CASCADE, related_name='Cuenta_Subastar')
 	subasta = models.ForeignKey(Subasta, null=True, blank=True, on_delete=models.SET_NULL)
 	precio_subasta = models.DecimalField('Precio a Subastar',  max_digits=10, decimal_places=2, default=0.00)
 	descripcion = models.TextField('Nota/Descripcion', null=True, blank=True)

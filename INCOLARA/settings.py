@@ -137,3 +137,6 @@ MEDIA_URL = '/media/'
 
 #Url del login
 LOGIN_URL = '/'
+
+
+AUTH_USER_MODEL = 'Base.Cuenta'

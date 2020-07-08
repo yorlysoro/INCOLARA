@@ -1,7 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from INCOLARA.settings import MEDIA_URL, STATIC_URL
 # Create your models here.
 SECTORES_CHOICE = [
 	('S1','Sector Primario'),
@@ -18,30 +19,27 @@ class Sectores(models.Model):
 		verbose_name = "Sector"
 		verbose_name_plural = "Sectores"
 	def __str__(self):
-		return self.sector + "--" + self.nombre
+		return self.sector + "--" + self.nombre + "--" + self.nombre_completo
 
-class Cuenta(models.Model):
-	usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+class Cuenta(AbstractUser):
 	domicilio = models.CharField('Domicilio de la Compania', max_length=255, null=True, blank=True)
 	rif = models.CharField('Registro de Informacion Fiscal', max_length=255, null=True, blank=True)
-	movil = models.CharField('Telefono Movil', max_length=8, null=True, blank=True)
-	local = models.CharField('Telefono Fijo', max_length=8, null=True, blank=True)
-	correo = models.EmailField('Correo Electronico', null=True, blank=True)
+	movil = models.CharField('Telefono Movil', max_length=12, null=True, blank=True)
+	local = models.CharField('Telefono Fijo', max_length=12, null=True, blank=True)
 	pagina = models.URLField('Pagina Web', null=True, blank=True)
 	sector = models.ForeignKey(Sectores, null=True, blank=True, on_delete=models.SET_NULL)
+	logo = models.ImageField(upload_to='media/cuentas', null=True, blank=True)
+
+	def get_logo(self):
+		if self.logo:
+			return '{}{}'.format(MEDIA_URL, self.logo)
+		return '{}{}'.format(STATIC_URL, 'images/empty.png')
+
 
 	class Meta:
 		verbose_name = "Cuenta"
 		verbose_name_plural = "Cuentas"
 
 	def __str__(self):
-		return self.rif
+		return str(str(self.rif) + "--" + str(self.first_name))
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Cuenta.objects.create(usuario=instance)
-
-#@receiver(post_save, sender=User)
-#def save_user_profile(sender, instance, **kwargs):
- #   instance.cuenta.save()

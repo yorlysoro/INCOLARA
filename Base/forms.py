@@ -11,20 +11,19 @@ class FormularioLogin(AuthenticationForm):
 
 class FormularioCuenta(forms.ModelForm):
 
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		for form in self.visible_fields():
+			form.field.widget.attrs['class'] = 'form-control'
+			form.field.widget.attrs['autocomplete'] = 'off'
+		self.fields['first_name'].widget.attrs['autofocus'] = True
+		self.fields['sector'].widget.attrs['class'] = 'standardSelect'
+
+
 	class Meta:
 		model = Cuenta
-		fields = ('usuario', 'domicilio', 'rif', 'movil', 'local', 'correo', 'pagina', 'sector')
-		labels = {
-			'sector' : 'Sector',
-		}
-		wigets = {
-			'sector' : forms.Select(
-				attrs = {
-					'class' : 'standardSelect',
-					'data-placeholder' : 'Seleccion su Sector'
-				}
-			)
-		}
+		fields = ('first_name', 'domicilio', 'rif', 'movil', 'local', 'email', 'pagina', 'sector', 'logo')
+		
 class FormularioSectores(forms.ModelForm):
 
 	class Meta:
