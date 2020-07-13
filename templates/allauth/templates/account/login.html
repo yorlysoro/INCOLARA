@@ -9,14 +9,25 @@
 {% block menu %}
 {% endblock %}
 {% block cuerpo %}
+
+ {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 d-flex flex-column justify-content-center align-content-center align-self-center">
 			<div class="row" >
 				<div class="col-lg-6 col-md-8 mx-auto my-auto mt-auto mb-auto mr-auto ml-auto">
 					<div class="card rounded shadow shadow-sm">
-						<div class="card-header ">
-						    <strong class="float-left">Inicio de Sesion</strong>
+						<div class="card-header text-center">
+						    <strong >Inicio de Sesion</strong>
 						</div>
 						<div class="card-body card-block">
 						    <form action="{% url 'account_login' %}" method="post" class="form-horizontal">

@@ -1,21 +1,66 @@
-{% extends "allauth/templates/account/base.html" %}
+{% extends "allauth/templates/account/login.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
-{% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+{% block cuerpo %}
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+ {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 d-flex flex-column justify-content-center align-content-center align-self-center">
+			<div class="row" >
+				<div class="col-lg-6 col-md-8 mx-auto my-auto mt-auto mb-auto mr-auto ml-auto">
+					<div class="card rounded shadow shadow-sm">
+						<div class="card-header text-center">
+						    <strong>Registrate</strong>
+						</div>
+						<div class="card-body card-block">
+						    <form  method="post" class="form-horizontal">
+						    	{% csrf_token %}
+						        <div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-email" class=" form-control-label"><strong>Usuario</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.username }}<span class="help-block">Por favor introduzca un nombre de usuario </span></div>
+						        </div>
+						        <div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Correo Electronico</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.email }}<span class="help-block">Por favor introduzca su corro electronico</span></div>
+						        </div>
+								    <div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Contraseña</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.password1 }}<span class="help-block">Por favor introduzca una contraseña</span></div>
+						        </div>
+                    <div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Repita la Contraseña</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.password2 }}<span class="help-block">Por favor repita la contraseña</span></div>
+						        </div>
+						        <div>
+							        <button type="submit" class="btn btn-primary btn-sm float-right">
+							        	<i class="fa fa-dot-circle-o"></i> Registrar
+							    	</button>
+							    </div>
+						    </form>
+						</div>
+						<div class="card-footer text-center">						    
+		                    	Copyright &copy; 2020 INCOLARA
+                          <p>Ya posee una cuenta, porfavor 
+                          <a href="{% url 'account_login' %}">inicia sesion.</a> </p>
+						</div>
+					</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 {% endblock %}

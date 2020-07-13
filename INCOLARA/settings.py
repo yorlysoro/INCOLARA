@@ -170,6 +170,9 @@ ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
 ACCOUNT_UNIQUE_EMAIL = True
 
 ACCOUNT_FORMS = {
-    'login': 'Base.forms.FormularioLogin'
-    
+    'login': 'Base.forms.FormularioLogin',
+    'signup': 'Base.forms.FormularioRegistro'
     }
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = False
+ACCOUNT_EMAIL_VERIFICATION = None
+ACCOUNT_EMAIL_CONFIRMATION_HMAC = False

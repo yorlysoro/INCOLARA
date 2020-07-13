@@ -1,13 +1,25 @@
-from allauth.account.forms import LoginForm
+from allauth.account.forms import LoginForm, SignupForm
 from django import forms
 from .models import Cuenta, Sectores
 class FormularioLogin(LoginForm):
 	def __init__(self, *args, **kwargs):
 	    super(FormularioLogin, self).__init__(*args,**kwargs)
 	    self.fields['login'].widget.attrs['class'] = 'form-control'
-	    self.fields['login'].widget.attrs['placeholder'] = 'Coloque su Usuario o Correo Electronico...'
 	    self.fields['password'].widget.attrs['class'] = 'form-control'
-	    self.fields['password'].widget.attrs['placeholder'] = 'Coloque su contraseña...'
+
+
+class FormularioRegistro(SignupForm):
+	def __init__(self, *args, **kwargs):
+		super(FormularioRegistro, self).__init__(*args,**kwargs)
+		self.fields['username'].widget.attrs['class'] = 'form-control'
+		self.fields['password1'].widget.attrs['class'] = 'form-control'
+		self.fields['password2'].widget.attrs['class'] = 'form-control'
+		self.fields['email'].widget.attrs['class'] = 'form-control'
+
+	def save(self, request):
+		user = super(FormularioRegistro, self).save(request)
+		return user
+
 
 class FormularioCuenta(forms.ModelForm):
 

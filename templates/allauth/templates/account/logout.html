@@ -1,21 +1,45 @@
-{% extends "allauth/templates/account/base.html" %}
+{% extends "allauth/templates/account/login.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block cuerpo %}
 
-{% block content %}
-<h1>{% trans "Sign Out" %}</h1>
-
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
-
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button type="submit">{% trans 'Sign Out' %}</button>
-</form>
-
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 d-flex flex-column justify-content-center align-content-center align-self-center">
+			<div class="row" >
+				<div class="col-lg-6 col-md-8 mx-auto my-auto mt-auto mb-auto mr-auto ml-auto">
+					<div class="card rounded shadow shadow-sm">
+						<div class="card-header text-center">
+						    <strong >Cerrar Sesion</strong>
+						</div>
+						<div class="card-body card-block">
+						    <form action="{% url 'account_logout' %}" method="post" class="form-horizontal">
+						    	{% csrf_token %}
+						        <div class="row form-group text-center">
+						            <div class="col-12 col-md-12"><p>{% trans 'Are you sure you want to sign out?' %}</p></div>
+						        </div>
+						        <div>
+							        <button type="submit" class="btn btn-danger btn-sm float-right">
+							        	<i class="fa fa-dot-circle-o"></i> Cerrar Sesion
+							    	</button>
+							    	<button type="reset" class="btn btn-primary btn-sm float-right">
+							        	<a class='text-white' href='{% url 'inicio' %}'><i class="fa fa-ban"> </i> Volver</a>
+							    	</button>
+							    </div>
+						    </form>
+						</div>
+						<div class="card-footer text-center">						    
+		                    	Copyright &copy; 2020 INCOLARA
+						</div>
+					</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 {% endblock %}
