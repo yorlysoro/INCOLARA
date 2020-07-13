@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+
+{% load static %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block cuerpo %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 d-flex flex-column justify-content-center align-content-center align-self-center">
+			<div class="row" >
+				<div class="col-lg-6 col-md-8 mx-auto my-auto mt-auto mb-auto mr-auto ml-auto">
+					<div class="card rounded shadow shadow-sm">
+						<div class="card-header ">
+						    <strong class="float-left">Inicio de Sesion</strong>
+						</div>
+						<div class="card-body card-block">
+						    <form action="{% url 'account_login' %}" method="post" class="form-horizontal">
+						    	{% csrf_token %}
+						        <div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-email" class=" form-control-label"><strong>Usuario</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.login }}<span class="help-block">Por favor introduzca su nombre de usuario o correo electronico</span></div>
+						        </div>
+						        <div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Contraseña</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.password }}<span class="help-block">Por favor introduzca su contraseña</span></div>
+						        </div>
+								<div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Recordar</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.remember }}</div>
+						        </div>
+						        <div>
+							        <button type="submit" class="btn btn-primary btn-sm float-right">
+							        	<i class="fa fa-dot-circle-o"></i> Iniciar
+							    	</button>
+							    	<button type="reset" class="btn btn-danger btn-sm float-right">
+							        	<i class="fa fa-ban"></i> Limpiar
+							    	</button>
+							    </div>
+						    </form>
+						</div>
+						<div class="card-footer text-center">						    
+		                    	Copyright &copy; 2020 INCOLARA
+                          <p>Si no posee aun cuenta, porfavor realize el
+                          <a href="{{ signup_url }}">registro</a> primero.</p>
+						</div>
+					</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "allauth/templates/socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+{% include "allauth/templates/socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+
+{% endif %}
+
+
+{% endblock %}
+{%  block footer %}
+{% endblock %}
