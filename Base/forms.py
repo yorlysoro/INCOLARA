@@ -1,11 +1,11 @@
-from django.contrib.auth.forms import AuthenticationForm
+from allauth.account.forms import LoginForm
 from django import forms
 from .models import Cuenta, Sectores
-class FormularioLogin(AuthenticationForm):
+class FormularioLogin(LoginForm):
 	def __init__(self, *args, **kwargs):
 	    super(FormularioLogin, self).__init__(*args,**kwargs)
-	    self.fields['username'].widget.attrs['class'] = 'form-control'
-	    self.fields['username'].widget.attrs['placeholder'] = 'Coloque su Usuario...'
+	    self.fields['login'].widget.attrs['class'] = 'form-control'
+	    self.fields['login'].widget.attrs['placeholder'] = 'Coloque su Usuario o Correo Electronico...'
 	    self.fields['password'].widget.attrs['class'] = 'form-control'
 	    self.fields['password'].widget.attrs['placeholder'] = 'Coloque su contraseña...'
 

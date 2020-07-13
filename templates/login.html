@@ -19,11 +19,15 @@
 						    	{% csrf_token %}
 						        <div class="row form-group">
 						            <div class="col col-md-3"><label for="hf-email" class=" form-control-label"><strong>Usuario</strong></label></div>
-						            <div class="col-12 col-md-9">{{ form.username }}<span class="help-block">Por favor introduzca su nombre de usuario</span></div>
+						            <div class="col-12 col-md-9">{{ form.login }}<span class="help-block">Por favor introduzca su nombre de usuario o correo electronico</span></div>
 						        </div>
 						        <div class="row form-group">
 						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Contraseña</strong></label></div>
 						            <div class="col-12 col-md-9">{{ form.password }}<span class="help-block">Por favor introduzca su contraseña</span></div>
+						        </div>
+								<div class="row form-group">
+						            <div class="col col-md-3"><label for="hf-password" class=" form-control-label"><strong>Recordar</strong></label></div>
+						            <div class="col-12 col-md-9">{{ form.remember }}</div>
 						        </div>
 						        <div>
 							        <button type="submit" class="btn btn-primary btn-sm float-right">
