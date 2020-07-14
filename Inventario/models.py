@@ -35,12 +35,29 @@ class BaseProducto(models.Model):
 	class Meta:
 		abstract = True
 
+class Variante(BaseProducto):
+	atributo = models.ManyToManyField(
+		Atributo,
+		related_name='VarianteAtributo',
+		)
+	valor = models.ManyToManyField(
+		Valores_Atributo, 
+		related_name='VarianteValor'
+		)
+	precio_extra = models.DecimalField('Precio Extra de Venta',max_digits=10, decimal_places=2, default=0.00)
+	class Meta:
+		verbose_name = "Variante"
+		verbose_name_plural = "Variantes"
+
+	def __str__(self):
+		return str(self.producto.nombre_producto + "---" + self.valor.valor)
+
 class Producto(BaseProducto):
 	nombre_producto = models.CharField('Nombre del Producto',max_length=255)
 	vender = models.BooleanField('Se puede vender',default=True)
 	comprar = models.BooleanField('Se puede comprar',default=True)
 	precio_venta = models.DecimalField('Precio de Venta',max_digits=10, decimal_places=2, default=0.00)
-
+	variante = models.ManyToManyField(Variante)
 	TIPO_PRODUCTO_CHOICES = (
 		('Co' , 'Consumible'), 
 		('Se' , 'Servicio'), 
@@ -56,20 +73,3 @@ class Producto(BaseProducto):
 		return self.nombre_producto
 
 
-class Variante(BaseProducto):
-	atributo = models.ManyToManyField(
-		Atributo,
-		related_name='VarianteAtributo',
-		)
-	valor = models.ManyToManyField(
-		Valores_Atributo, 
-		related_name='VarianteValor'
-		)
-	precio_extra = models.DecimalField('Precio Extra de Venta',max_digits=10, decimal_places=2, default=0.00)
-	producto = models.ManyToManyField(Producto)
-	class Meta:
-		verbose_name = "Variante"
-		verbose_name_plural = "Variantes"
-
-	def __str__(self):
-		return str(self.producto.nombre_producto + "---" + self.valor.valor)
