@@ -28,8 +28,11 @@ class FormularioCuenta(forms.ModelForm):
 		for form in self.visible_fields():
 			form.field.widget.attrs['class'] = 'form-control'
 			form.field.widget.attrs['autocomplete'] = 'off'
+		self.fields['logo'].widget.attrs['class'] = 'input-control'
 		self.fields['first_name'].widget.attrs['autofocus'] = True
 		self.fields['sector'].widget.attrs['class'] = 'standardSelect'
+		#self.fields['sector'].widget.attrs['style'] = 'display: none;'
+		self.fields['sector'].widget.attrs['multiple'] = True
 
 
 	class Meta:
