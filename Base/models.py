@@ -27,7 +27,7 @@ class Cuenta(AbstractUser):
 	movil = models.CharField('Telefono Movil', max_length=12, null=True, blank=True)
 	local = models.CharField('Telefono Fijo', max_length=12, null=True, blank=True)
 	pagina = models.URLField('Pagina Web', null=True, blank=True)
-	sector = models.ForeignKey(Sectores, null=True, blank=True, on_delete=models.SET_NULL)
+	sector = models.ManyToManyField(Sectores)
 	logo = models.ImageField(upload_to='media/cuentas', null=True, blank=True)
 
 	def get_logo(self):
