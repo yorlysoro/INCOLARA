@@ -1,12 +1,6 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
 from django.views.generic import TemplateView, UpdateView, ListView, CreateView, DetailView, DeleteView
-from django.http import HttpResponseRedirect
-from django.contrib.auth import login, logout
-from .forms import FormularioLogin, FormularioCuenta, FormularioSectores
+from .forms import FormularioSectores, FormularioCuenta
 from .models import Cuenta, Sectores
 # Create your views here.
 

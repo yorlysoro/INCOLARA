@@ -144,7 +144,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 #Url del login
-LOGIN_URL = '/'
+LOGIN_URL = '/login'
 
 
 AUTH_USER_MODEL = 'Base.Cuenta'
@@ -165,7 +165,7 @@ LOGIN_REDIRECT_URL = '/inicio'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 
-ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/login'
 
 ACCOUNT_UNIQUE_EMAIL = True
 

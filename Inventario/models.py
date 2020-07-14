@@ -57,7 +57,7 @@ class Producto(BaseProducto):
 	vender = models.BooleanField('Se puede vender',default=True)
 	comprar = models.BooleanField('Se puede comprar',default=True)
 	precio_venta = models.DecimalField('Precio de Venta',max_digits=10, decimal_places=2, default=0.00)
-	variante = models.ManyToManyField(Variante)
+	variante = models.ManyToManyField(Variante, blank=True)
 	TIPO_PRODUCTO_CHOICES = (
 		('Co' , 'Consumible'), 
 		('Se' , 'Servicio'), 

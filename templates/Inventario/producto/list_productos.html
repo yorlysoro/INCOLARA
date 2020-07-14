@@ -7,5 +7,33 @@ INCOLARA -- Productos en el Inventario
 
 {% block cuerpo %}
 {% include 'Inventario/submenu.html' %}
-
+<div class="content">
+	<div class="card">
+        <div class="card-header">
+            <strong class="card-title">Lista de Productos</strong>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-bordered">
+			    <thead>
+			        <tr>
+			          <th scope="col">Nombre del Producto</th>
+			          <th scope="col">Precio de Venta</th>
+			          <th scope="col">Cantidad a Mano</th>
+			          <th scope="col">Capacidad de Produccion</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+				    <tr>
+				    	{% for producto in Productos %}
+				        <th scope="row"><a href="{% url 'Inventario:detalle_producto' producto.id %}">{{ producto.nombre_producto }}</a></th>
+				        <td>{{ producto.precio_venta }}</td>
+				        <td>{{ producto.cantidad }}</td>
+				        <td>{{ producto.capacidad }}</td>
+				        {% endfor %}
+				    </tr>
+			    </tbody>
+			</table>
+    	</div>
+    </div>
+</div>
 {% endblock %}
